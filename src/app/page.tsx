@@ -1,17 +1,18 @@
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "./page.module.css";
+"use client";
 
-const inter = Inter({ subsets: ["latin"] });
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  const a = {
-    a: "",
-  };
+  const route = useRouter();
+  useEffect(() => {
+    fetch("/api/auth")
+      .then((res) => {
+        if (res.ok) return route.push("/dashboard");
+        else route.push("/signin");
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
-  return (
-    <main className={styles.main}>
-      <h1>hello worlds</h1>
-    </main>
-  );
+  return "";
 }
