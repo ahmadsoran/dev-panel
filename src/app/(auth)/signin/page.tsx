@@ -1,29 +1,29 @@
 "use client";
 import Button from "@/components/Button";
-import API from "@/util/helper/API";
 import { Typography } from "antd";
+import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
-
+import { signIn } from "next-auth/react";
 export default function Signin() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const [Error, setError] = useState("");
+  const router = useRouter();
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const username = usernameRef.current?.value;
     const password = passwordRef.current?.value;
-    if (username && password) {
-      const res = await fetch("/api/signin", {
-        method: "post",
-        credentials: "include",
-        body: JSON.stringify({ username, password }),
-        headers: API.RequestHeader,
-        redirect: "follow",
-      });
-      const data = await res.json();
-      if (!res.ok) setError(data.error);
-      else setError("");
-      console.log(data);
+    try {
+      if (username && password) {
+        const data = await signIn("credentials", {
+          redirect: false,
+          username,
+          password,
+        });
+        console.log(data?.status);
+      }
+    } catch (error) {
+      throw error;
     }
   };
   return (

@@ -1,18 +1,8 @@
-"use client";
+import API from "@/util/helper/API";
+import { redirect } from "next/navigation";
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
-export default function Home() {
-  const route = useRouter();
-  useEffect(() => {
-    fetch("/api/auth")
-      .then((res) => {
-        if (res.ok) return route.push("/dashboard");
-        else route.push("/signin");
-      })
-      .catch((e) => console.log(e));
-  }, []);
-
-  return "";
+export default async function Home() {
+  const data = false;
+  if (!data) redirect("/signin");
+  else redirect("/dashboard");
 }
