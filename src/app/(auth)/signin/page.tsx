@@ -1,9 +1,10 @@
 "use client";
 import Button from "@/components/Button";
+import API from "@/util/helper/API";
 import { Typography } from "antd";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
-import { signIn } from "next-auth/react";
+
 export default function Signin() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -15,12 +16,14 @@ export default function Signin() {
     const password = passwordRef.current?.value;
     try {
       if (username && password) {
-        const data = await signIn("credentials", {
-          redirect: false,
-          username,
-          password,
+        const data = await fetch("/api/auth/signin", {
+          body: JSON.stringify({ username, password }),
+          headers: API.RequestHeader,
+          method: "post",
         });
-        console.log(data?.status);
+        const res = await data.json();
+        if (data.ok) router.replace("/dashboard");
+        if (!data.ok) setError(res.error);
       }
     } catch (error) {
       throw error;

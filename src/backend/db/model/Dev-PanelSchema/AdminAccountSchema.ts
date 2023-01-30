@@ -19,7 +19,7 @@ const AdminAccount = new Schema<AdminAccountDataType>(
     timestamps: true,
   }
 );
-
+// const AdminModelType =   model("admin-account", AdminAccount);
 const AdminAccountSchema =
   models["admin-account"] || model("admin-account", AdminAccount);
 
