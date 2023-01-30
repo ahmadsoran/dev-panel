@@ -1,4 +1,5 @@
-export default async function Home() {
-  // @ts-ignore
-  return <h1>Authorizing</h1>;
+import Dashboard from "./Dashboard";
+
+export default function Home() {
+  return <Dashboard />;
 }
