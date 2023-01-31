@@ -22,7 +22,7 @@ export default function Signin() {
           method: "post",
         });
         const res = await data.json();
-        if (data.ok) router.replace("/dashboard");
+        if (data.ok) window.location.reload();
         if (!data.ok) setError(res.error);
       }
     } catch (error) {

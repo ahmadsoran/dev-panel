@@ -8,8 +8,7 @@ type decodedToken = {
 };
 export async function isAdmin(req: NextApiRequest) {
   const token = req.cookies.token;
-  console.log("🚀 ~ file: Auth.ts:11 ~ isAdmin ~ token", token);
-  const privateKey = process.env.PRV_KEY;
+   const privateKey = process.env.PRV_KEY;
   try {
     if (!privateKey) {
       WinstonLogger({ level: "error", msg: "private key is " + privateKey });

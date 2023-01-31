@@ -7,8 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { token } = req.cookies;
-  console.log("🚀 ~ file: auth.ts:10 ~ token", token);
-  if (!token) throw new Error("sign in first");
+   if (!token) throw new Error("sign in first");
   try {
     const ress = await fetch(API.Platforms, {
       method: "get",
@@ -18,8 +17,7 @@ export default async function handler(
       },
     });
     const data = await ress.json();
-    console.log("🚀 ~ file: signin.ts:24 ~ data", data);
-    res.status(200).json({ data: data });
+     res.status(200).json({ data: data });
     res.end();
   } catch (error) {
     if (error instanceof Error)

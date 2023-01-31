@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import winston from "winston";
 import AdminAccountSchema from "../../db/model/Dev-PanelSchema/AdminAccountSchema";
 import PlatformsApiKeySchema from "../../db/model/PlatformSchema/Apikey";
@@ -26,7 +25,6 @@ export default async function GenApiKeyForPlatforms(
     const PlatformData = await PlatformsApiKeySchema.findOne()
       .where("Platform")
       .equals(platformID);
-    console.log(platformID, PlatformData);
     const ApiKeyEnc = jwt.sign({ apikey: randomUUID() }, privateKey);
     if (!PlatformData) {
       await new PlatformsApiKeySchema({
