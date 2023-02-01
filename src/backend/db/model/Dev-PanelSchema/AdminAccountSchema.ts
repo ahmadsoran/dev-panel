@@ -1,5 +1,6 @@
-import { model, models, Schema } from "mongoose";
+import { Schema } from "mongoose";
 import { AdminAccountDataType } from "../../../@types/Admin-account";
+import createModel from "../CreateModel";
 
 const AdminAccount = new Schema<AdminAccountDataType>(
   {
@@ -19,8 +20,7 @@ const AdminAccount = new Schema<AdminAccountDataType>(
     timestamps: true,
   }
 );
-// const AdminModelType =   model("admin-account", AdminAccount);
-const AdminAccountSchema =
-  models["admin-account"] || model("admin-account", AdminAccount);
+
+const AdminAccountSchema = createModel("admin-account", AdminAccount);
 
 export default AdminAccountSchema;

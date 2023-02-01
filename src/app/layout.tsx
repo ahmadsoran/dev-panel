@@ -3,10 +3,10 @@ import "./globals.css";
 import ProtectedRoute from "./ProtectedRoute";
 import { Poppins } from "@next/font/google";
 
-export const poppins = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
+const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
-  display: "optional",
+  display: "block",
 });
 export default function RootLayout({
   children,

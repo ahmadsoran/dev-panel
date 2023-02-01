@@ -41,7 +41,7 @@ export async function GetUsersOfPlatform(req: Request, res: Response) {
       .populate({
         path: "Errors",
         model: "user-errors",
-        select: "priority , status",
+        select: "priority status",
         options: {
           lean: true,
         },

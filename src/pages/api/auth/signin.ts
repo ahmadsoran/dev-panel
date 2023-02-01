@@ -25,7 +25,9 @@ export default async function handler(
     if (!privateKey) throw new Error("unknown error");
     const AdminData = await AdminAccountSchema.findOne({
       username,
-    });
+    })
+      .lean()
+      .exec();
 
     ///
     if (!AdminData) throw new Error("User not found!");
@@ -36,16 +38,29 @@ export default async function handler(
     const token = jwt.sign({ id: AdminData._id }, privateKey, {
       expiresIn: "12h",
     });
-    res.setHeader(
-      "Set-Cookie",
+    res.setHeader("Set-Cookie", [
       cookie.serialize("token", token, {
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
         maxAge: 60 * 60 * 10,
         sameSite: "strict",
         path: "/",
-      })
-    );
+      }),
+      cookie.serialize(
+        "user",
+        JSON.stringify({
+          name: AdminData.name,
+          username: AdminData.username,
+          role: AdminData.role,
+        }),
+        {
+          secure: process.env.NODE_ENV === "production",
+          maxAge: 60 * 60 * 10,
+          sameSite: "strict",
+          path: "/",
+        }
+      ),
+    ]);
 
     return res.status(200).json({ data: "signed in" });
   } catch (error) {
