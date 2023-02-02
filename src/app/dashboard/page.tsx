@@ -1,3 +1,6 @@
+import Home from "./_Home";
+
 export default function Dashboard() {
-  return <div>Dashboard</div>;
+  // @ts-ignore
+  return <Home />;
 }

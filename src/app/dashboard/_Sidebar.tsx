@@ -12,15 +12,15 @@ export default function Sidebar() {
           <ActiveLink
             key={i}
             href={route.path}
-            className="bg-neutral-100  grid place-items-center rounded-xl my-2 w-full font-medium hover:opacity-60"
+            className="bg-neutral-800  grid place-items-center rounded-xl my-2 w-full font-medium hover:opacity-60"
             activestyle="text-blue-500"
-            deafultcolor="text-neutral-900">
+            deafultcolor="text-neutral-100">
             {route.name}
           </ActiveLink>
         ))}
       </div>
       <Link href="/signout">
-        <div className="bg-red-600 p-2 grid place-items-center font-medium rounded-xl my-2 w-full hover:opacity-60  text-white ">
+        <div className="bg-red-900 p-2 grid place-items-center font-medium rounded-xl my-2 w-full hover:opacity-60  text-white ">
           Sign out
         </div>
       </Link>

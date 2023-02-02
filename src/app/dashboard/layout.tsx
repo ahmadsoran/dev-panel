@@ -1,6 +1,4 @@
-import HeaderComponent from "./_header";
 import Sidebar from "./_Sidebar";
-import Bg from "../../../public/assets/img/background.jpg";
 import Image from "next/image";
 export default function RootLayout({
   children,
@@ -17,7 +15,7 @@ export default function RootLayout({
       </div>
       <div className="bg-black opacity-80  w-full h-full absolute top-0 left-0 -z-10"></div>
       <Image
-        src={Bg}
+        src="/static/assets/img/background.jpg"
         className="min-w-min w-full -z-20  h-full object-cover absolute top-0 left-0"
         width={1000}
         height={1000}
